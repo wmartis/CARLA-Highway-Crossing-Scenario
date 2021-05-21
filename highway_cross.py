@@ -34,7 +34,7 @@ class AccelerateSimulation(AtomicBehavior):
         world = CarlaDataProvider.get_world()
         settings = world.get_settings()
         settings.fixed_delta_seconds = 0.05
-        print('acceler8')
+        
         world.apply_settings(settings)
 
         return py_trees.common.Status.SUCCESS
@@ -48,7 +48,7 @@ class RestoreSimulation(AtomicBehavior):
         world = CarlaDataProvider.get_world()
         settings = world.get_settings()
         settings.fixed_delta_seconds = 0
-        print('deccler8')
+       
         world.apply_settings(settings)
 
         return py_trees.common.Status.RUNNING
@@ -75,21 +75,21 @@ class HighwayCross(BasicScenario):
         tm.global_percentage_speed_difference(-1000)
 
         settings = world.get_settings()
-        print(settings.fixed_delta_seconds)
+        
         self.stopThread = False
         self.trafficThread = threading.Thread(target=self.generate_traffic, daemon=True)
         self.trafficThread.start()
         #trafficThread.join()
        
         settings.fixed_delta_seconds = 0.1
-        print('acceler8')
+        
         world.apply_settings(settings)
         time.sleep(0.4)
         settings.fixed_delta_seconds = 0
         world.apply_settings(settings)
 
     def generate_traffic(self):
-        print('hello from thread')
+
         world = CarlaDataProvider.get_world()
         client = CarlaDataProvider.get_client()
         blueprint_library = world.get_blueprint_library()
@@ -110,9 +110,7 @@ class HighwayCross(BasicScenario):
 
         
         for x in range(24):
-            #if self.stopThread:
-                #print('bye from thread')
-                #break
+            
             batch = []
             spawns = np.random.binomial(1, 0.5, 5)
             for i, point in enumerate(spawn_points):
